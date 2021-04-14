@@ -24,10 +24,13 @@ display:inline-block;
 margin-bottom:0;
 }
 }
-.topcorner{
+/* .topcorner{
 position:absolute;
 top:2%;
 right:2%;
+} */
+.newtopcorner{
+    right:2%;
 }
 .btn{
 background-color: #4285F4;
@@ -36,3 +39,4 @@ border: none
 .step-links a{
 color: #4285F4;
 }
+
