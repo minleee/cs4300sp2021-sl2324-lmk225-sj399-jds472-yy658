@@ -1,181 +1,207 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/static/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/main.css">
-        <style>
-            body {
-                width: 100%;
-                height: 100%;
-            }
 
-            #newtopcorner {
-                text-align:right;
-                margin-top: 300px;
-            }
+<head>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/main.css">
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+        }
 
-            .message  {
-                position: relative;
-                font-size: 20px;
-                border-radius: 20px;
-                padding: 8px 15px;
-                margin-left: 10px;
-                margin-bottom: 5px;
-                display: inline-block;
-                background: #f1f3f4;
-                color: #1579BD;
-                border-bottom-left-radius: 16px 14px;
-            }
+        #newtopcorner {
+            text-align: right;
+            margin-top: 300px;
+        }
 
-            form {
-                position: relative;
-                font-size: 20px;
-                border-radius: 30px;
-                text-align: right;
-                margin-right: 10px;
-                display: inline-block;
-                background: #f1f3f4;
-                color: #1579BD;
-                border-bottom-right-radius: 16px 14px;
-            }
+        .message {
+            position: relative;
+            font-size: 20px;
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            display: inline-block;
+            background: #f1f3f4;
+            color: #1579BD;
+            border-bottom-left-radius: 16px 14px;
+        }
 
-            .message_row{
-                display: flex;
-                flex-direction: row;
-            }
+        form {
+            position: relative;
+            font-size: 20px;
+            border-radius: 30px;
+            text-align: right;
+            margin-right: 10px;
+            display: inline-block;
+            background: #f1f3f4;
+            color: #1579BD;
+            border-bottom-right-radius: 16px 14px;
+        }
 
-            #form {
-                float: right;
-            }
+        .message_row {
+            display: flex;
+            flex-direction: row;
+        }
 
-            .messages {
-                width: 50%;
-                margin: 0 auto;
-            }
+        #form {
+            float: right;
+        }
 
-            .message_img svg {
-                border-radius: 50%;
-                border: 3px solid #f1f3f4;
-            }
-            
-            #input {
-                border-bottom-left-radius: 16px 14px;
-                border-radius: 20px;
-                font-size: 20px;
-                border: none;
-                outline: none;
-                text-align: right;
-                background: #f1f3f4;
-                color: #1579BD;
-            }
-        </style>
+        .messages {
+            width: 50%;
+            margin: 0 auto;
+        }
 
-    </head>
-    <body>   
-        
-        <div class = "logo" style="text-align:center; padding-top:0">
-            <svg width="160" height="160" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 50px">
-                <g opacity="0.8">
-                <rect y="2.10193" width="39.9521" height="190.948" fill="#F9D1C5"/>
-                <rect width="38.1897" height="199.76" transform="matrix(0.00548525 0.999985 -0.999977 0.0067614 199.757 0)" fill="#F9D1C5"/>
-                </g>
-                <g opacity="0.8">
-                <rect x="474.078" width="38.5667" height="196.078" transform="rotate(90 474.078 0)" fill="#F4E8A1"/>
-                <rect width="39.2157" height="192.834" transform="matrix(-0.999987 0.00514923 -0.00720261 -0.999974 478 192.848)" fill="#F4E8A1"/>
-                </g>
-                <g opacity="0.8">
-                <rect x="10.9216" y="500" width="38.5667" height="196.078" transform="rotate(-90 10.9216 500)" fill="#D9ECDC"/>
-                <rect width="39.2157" height="192.834" transform="matrix(0.999987 -0.00514923 0.00720261 0.999974 7 307.152)" fill="#D9ECDC"/>
-                </g>
-                <g opacity="0.8">
-                <rect x="474.972" y="496.198" width="39.9521" height="189.248" transform="rotate(180 474.972 496.198)" fill="#F2DDFD"/>
-                <rect width="37.8497" height="199.76" transform="matrix(-0.00548525 -0.999985 0.999977 -0.0067614 275.215 500)" fill="#F2DDFD"/>
-                </g>
-                <path d="M0.46875 290.432L17.2266 206.643H33.3398L49.043 270.218L89.5898 206.643H105.117L88.3594 290.432H74.0039L85.6641 232.073L51.2695 290.432H38.0273L26.4844 232.073L14.8242 290.432H0.46875ZM123.926 248.303C123.926 270.921 134.141 282.229 154.57 282.229C174.57 282.229 184.57 270.921 184.57 248.303C184.57 225.999 174.57 214.846 154.57 214.846C134.141 214.846 123.926 225.999 123.926 248.303ZM112.5 248.655C112.5 220.257 126.523 206.057 154.57 206.057C182.188 206.057 195.996 220.257 195.996 248.655C195.996 276.897 182.188 291.018 154.57 291.018C126.523 291.018 112.5 276.897 112.5 248.655ZM203.555 290.432L220.312 206.643H259.57C275.508 206.643 282.168 213.147 279.551 226.155C277.676 235.686 271.133 242.503 259.922 246.604C270.586 248.675 274.863 255.022 272.754 265.647C269.434 282.171 259.043 290.432 241.582 290.432H203.555ZM243.633 276.956C250.508 276.956 254.648 273.44 256.055 266.409C257.812 257.698 253.555 253.343 243.281 253.343H238.594L240.586 243.323C253.906 241.175 261.426 235.784 263.145 227.151C264.082 222.464 261.66 220.12 255.879 220.12H233.145L221.777 276.956H243.633ZM303.105 206.643V290.432H292.266V206.643H303.105ZM379.629 206.643V215.432H335.684V243.557H377.578V252.346H335.684V281.643H380.508V290.432H324.844V206.643H379.629ZM458.965 206.643L456.27 220.12H432.246L418.184 290.432H402.656L416.719 220.12H392.695L395.391 206.643H458.965ZM483.34 206.643L466.582 290.432H451.055L467.812 206.643H483.34Z" fill="#1579BD"/>
+        .message_img svg {
+            border-radius: 50%;
+            border: 3px solid #f1f3f4;
+        }
+
+        #input {
+            border-bottom-left-radius: 16px 14px;
+            border-radius: 20px;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            text-align: right;
+            background: #f1f3f4;
+            color: #1579BD;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="logo" style="text-align:center; padding-top:0">
+        <svg width="160" height="160" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="margin-bottom: 50px">
+            <g opacity="0.8">
+                <rect y="2.10193" width="39.9521" height="190.948" fill="#F9D1C5" />
+                <rect width="38.1897" height="199.76"
+                    transform="matrix(0.00548525 0.999985 -0.999977 0.0067614 199.757 0)" fill="#F9D1C5" />
+            </g>
+            <g opacity="0.8">
+                <rect x="474.078" width="38.5667" height="196.078" transform="rotate(90 474.078 0)" fill="#F4E8A1" />
+                <rect width="39.2157" height="192.834"
+                    transform="matrix(-0.999987 0.00514923 -0.00720261 -0.999974 478 192.848)" fill="#F4E8A1" />
+            </g>
+            <g opacity="0.8">
+                <rect x="10.9216" y="500" width="38.5667" height="196.078" transform="rotate(-90 10.9216 500)"
+                    fill="#D9ECDC" />
+                <rect width="39.2157" height="192.834"
+                    transform="matrix(0.999987 -0.00514923 0.00720261 0.999974 7 307.152)" fill="#D9ECDC" />
+            </g>
+            <g opacity="0.8">
+                <rect x="474.972" y="496.198" width="39.9521" height="189.248" transform="rotate(180 474.972 496.198)"
+                    fill="#F2DDFD" />
+                <rect width="37.8497" height="199.76"
+                    transform="matrix(-0.00548525 -0.999985 0.999977 -0.0067614 275.215 500)" fill="#F2DDFD" />
+            </g>
+            <path
+                d="M0.46875 290.432L17.2266 206.643H33.3398L49.043 270.218L89.5898 206.643H105.117L88.3594 290.432H74.0039L85.6641 232.073L51.2695 290.432H38.0273L26.4844 232.073L14.8242 290.432H0.46875ZM123.926 248.303C123.926 270.921 134.141 282.229 154.57 282.229C174.57 282.229 184.57 270.921 184.57 248.303C184.57 225.999 174.57 214.846 154.57 214.846C134.141 214.846 123.926 225.999 123.926 248.303ZM112.5 248.655C112.5 220.257 126.523 206.057 154.57 206.057C182.188 206.057 195.996 220.257 195.996 248.655C195.996 276.897 182.188 291.018 154.57 291.018C126.523 291.018 112.5 276.897 112.5 248.655ZM203.555 290.432L220.312 206.643H259.57C275.508 206.643 282.168 213.147 279.551 226.155C277.676 235.686 271.133 242.503 259.922 246.604C270.586 248.675 274.863 255.022 272.754 265.647C269.434 282.171 259.043 290.432 241.582 290.432H203.555ZM243.633 276.956C250.508 276.956 254.648 273.44 256.055 266.409C257.812 257.698 253.555 253.343 243.281 253.343H238.594L240.586 243.323C253.906 241.175 261.426 235.784 263.145 227.151C264.082 222.464 261.66 220.12 255.879 220.12H233.145L221.777 276.956H243.633ZM303.105 206.643V290.432H292.266V206.643H303.105ZM379.629 206.643V215.432H335.684V243.557H377.578V252.346H335.684V281.643H380.508V290.432H324.844V206.643H379.629ZM458.965 206.643L456.27 220.12H432.246L418.184 290.432H402.656L416.719 220.12H392.695L395.391 206.643H458.965ZM483.34 206.643L466.582 290.432H451.055L467.812 206.643H483.34Z"
+                fill="#1579BD" />
+        </svg>
+
+    </div>
+
+    <div class="messages">
+        <div class="message_row">
+            <div class="message_img">
+                <svg width="60" height="60" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g opacity="0.8">
+                        <rect y="2.10193" width="39.9521" height="190.948" fill="#F9D1C5" />
+                        <rect width="38.1897" height="199.76"
+                            transform="matrix(0.00548525 0.999985 -0.999977 0.0067614 199.757 0)" fill="#F9D1C5" />
+                    </g>
+                    <g opacity="0.8">
+                        <rect x="474.078" width="38.5667" height="196.078" transform="rotate(90 474.078 0)"
+                            fill="#F4E8A1" />
+                        <rect width="39.2157" height="192.834"
+                            transform="matrix(-0.999987 0.00514923 -0.00720261 -0.999974 478 192.848)" fill="#F4E8A1" />
+                    </g>
+                    <g opacity="0.8">
+                        <rect x="10.9216" y="500" width="38.5667" height="196.078" transform="rotate(-90 10.9216 500)"
+                            fill="#D9ECDC" />
+                        <rect width="39.2157" height="192.834"
+                            transform="matrix(0.999987 -0.00514923 0.00720261 0.999974 7 307.152)" fill="#D9ECDC" />
+                    </g>
+                    <g opacity="0.8">
+                        <rect x="474.972" y="496.198" width="39.9521" height="189.248"
+                            transform="rotate(180 474.972 496.198)" fill="#F2DDFD" />
+                        <rect width="37.8497" height="199.76"
+                            transform="matrix(-0.00548525 -0.999985 0.999977 -0.0067614 275.215 500)" fill="#F2DDFD" />
+                    </g>
+                    <path
+                        d="M0.46875 290.432L17.2266 206.643H33.3398L49.043 270.218L89.5898 206.643H105.117L88.3594 290.432H74.0039L85.6641 232.073L51.2695 290.432H38.0273L26.4844 232.073L14.8242 290.432H0.46875ZM123.926 248.303C123.926 270.921 134.141 282.229 154.57 282.229C174.57 282.229 184.57 270.921 184.57 248.303C184.57 225.999 174.57 214.846 154.57 214.846C134.141 214.846 123.926 225.999 123.926 248.303ZM112.5 248.655C112.5 220.257 126.523 206.057 154.57 206.057C182.188 206.057 195.996 220.257 195.996 248.655C195.996 276.897 182.188 291.018 154.57 291.018C126.523 291.018 112.5 276.897 112.5 248.655ZM203.555 290.432L220.312 206.643H259.57C275.508 206.643 282.168 213.147 279.551 226.155C277.676 235.686 271.133 242.503 259.922 246.604C270.586 248.675 274.863 255.022 272.754 265.647C269.434 282.171 259.043 290.432 241.582 290.432H203.555ZM243.633 276.956C250.508 276.956 254.648 273.44 256.055 266.409C257.812 257.698 253.555 253.343 243.281 253.343H238.594L240.586 243.323C253.906 241.175 261.426 235.784 263.145 227.151C264.082 222.464 261.66 220.12 255.879 220.12H233.145L221.777 276.956H243.633ZM303.105 206.643V290.432H292.266V206.643H303.105ZM379.629 206.643V215.432H335.684V243.557H377.578V252.346H335.684V281.643H380.508V290.432H324.844V206.643H379.629ZM458.965 206.643L456.27 220.12H432.246L418.184 290.432H402.656L416.719 220.12H392.695L395.391 206.643H458.965ZM483.34 206.643L466.582 290.432H451.055L467.812 206.643H483.34Z"
+                        fill="#1579BD" />
                 </svg>
-                
-        </div>
 
-        <div class = "messages">
-            <div class="message_row">
-                <div class="message_img">
-                    <svg width="60" height="60" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g opacity="0.8">
-                        <rect y="2.10193" width="39.9521" height="190.948" fill="#F9D1C5"/>
-                        <rect width="38.1897" height="199.76" transform="matrix(0.00548525 0.999985 -0.999977 0.0067614 199.757 0)" fill="#F9D1C5"/>
-                        </g>
-                        <g opacity="0.8">
-                        <rect x="474.078" width="38.5667" height="196.078" transform="rotate(90 474.078 0)" fill="#F4E8A1"/>
-                        <rect width="39.2157" height="192.834" transform="matrix(-0.999987 0.00514923 -0.00720261 -0.999974 478 192.848)" fill="#F4E8A1"/>
-                        </g>
-                        <g opacity="0.8">
-                        <rect x="10.9216" y="500" width="38.5667" height="196.078" transform="rotate(-90 10.9216 500)" fill="#D9ECDC"/>
-                        <rect width="39.2157" height="192.834" transform="matrix(0.999987 -0.00514923 0.00720261 0.999974 7 307.152)" fill="#D9ECDC"/>
-                        </g>
-                        <g opacity="0.8">
-                        <rect x="474.972" y="496.198" width="39.9521" height="189.248" transform="rotate(180 474.972 496.198)" fill="#F2DDFD"/>
-                        <rect width="37.8497" height="199.76" transform="matrix(-0.00548525 -0.999985 0.999977 -0.0067614 275.215 500)" fill="#F2DDFD"/>
-                        </g>
-                        <path d="M0.46875 290.432L17.2266 206.643H33.3398L49.043 270.218L89.5898 206.643H105.117L88.3594 290.432H74.0039L85.6641 232.073L51.2695 290.432H38.0273L26.4844 232.073L14.8242 290.432H0.46875ZM123.926 248.303C123.926 270.921 134.141 282.229 154.57 282.229C174.57 282.229 184.57 270.921 184.57 248.303C184.57 225.999 174.57 214.846 154.57 214.846C134.141 214.846 123.926 225.999 123.926 248.303ZM112.5 248.655C112.5 220.257 126.523 206.057 154.57 206.057C182.188 206.057 195.996 220.257 195.996 248.655C195.996 276.897 182.188 291.018 154.57 291.018C126.523 291.018 112.5 276.897 112.5 248.655ZM203.555 290.432L220.312 206.643H259.57C275.508 206.643 282.168 213.147 279.551 226.155C277.676 235.686 271.133 242.503 259.922 246.604C270.586 248.675 274.863 255.022 272.754 265.647C269.434 282.171 259.043 290.432 241.582 290.432H203.555ZM243.633 276.956C250.508 276.956 254.648 273.44 256.055 266.409C257.812 257.698 253.555 253.343 243.281 253.343H238.594L240.586 243.323C253.906 241.175 261.426 235.784 263.145 227.151C264.082 222.464 261.66 220.12 255.879 220.12H233.145L221.777 276.956H243.633ZM303.105 206.643V290.432H292.266V206.643H303.105ZM379.629 206.643V215.432H335.684V243.557H377.578V252.346H335.684V281.643H380.508V290.432H324.844V206.643H379.629ZM458.965 206.643L456.27 220.12H432.246L418.184 290.432H402.656L416.719 220.12H392.695L395.391 206.643H458.965ZM483.34 206.643L466.582 290.432H451.055L467.812 206.643H483.34Z" fill="#1579BD"/>
-                        </svg>
-                        
-                </div>
-                <div class="message">
-                    Enter your last text message to see your most likely MBTI!
-                </div>
-                <div class="tail"></div>
             </div>
+            <div class="message">
+                Enter your last text message to see your most likely MBTI!
+            </div>
+            <div class="tail"></div>
+        </div>
         <br>
 
         <div id="form">
             <div class="message_row">
                 <form class="form-inline global-search">
-                <div class="form-group">
-                    <input id="input" type="text" name="search" class="form-control" placeholder="Place your text here">
-                </div>
-                <!-- <button type="submit" id="search" class="btn btn-info"> Search </button> -->
+                    <div class="form-group">
+                        <input id="input" type="text" name="search" class="form-control"
+                            placeholder="Place your text here">
+                    </div>
+                    <!-- <button type="submit" id="search" class="btn btn-info"> Search </button> -->
                 </form>
                 <div class="message_img">
                     <svg width="50" height="50" viewBox="0 0 300 352" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.70898 130.246H15.7227L43.8867 181.311L72.4609 130.246H87.1582L49.834 193.82V228H37.1875V193.82L1.70898 130.246ZM110.4 178.85C110.4 205.236 122.318 218.43 146.152 218.43C169.486 218.43 181.152 205.236 181.152 178.85C181.152 152.827 169.486 139.816 146.152 139.816C122.318 139.816 110.4 152.827 110.4 178.85ZM97.0703 179.26C97.0703 146.128 113.431 129.562 146.152 129.562C178.372 129.562 194.482 146.128 194.482 179.26C194.482 212.209 178.372 228.684 146.152 228.684C113.431 228.684 97.0703 212.209 97.0703 179.26ZM213.691 190.266V130.246H226.338V190.266C226.338 209.042 235.68 218.43 254.365 218.43C273.05 218.43 282.393 209.042 282.393 190.266V130.246H295.039V190.266C295.039 215.878 281.481 228.684 254.365 228.684C227.249 228.684 213.691 215.878 213.691 190.266Z" fill="#1579BD"/>
-                        <ellipse cx="86" cy="66" rx="19" ry="36" fill="#F4E8A1"/>
-                        <ellipse cx="218.5" cy="66" rx="18.5" ry="36" fill="#F4E8A1"/>
+                        <path
+                            d="M1.70898 130.246H15.7227L43.8867 181.311L72.4609 130.246H87.1582L49.834 193.82V228H37.1875V193.82L1.70898 130.246ZM110.4 178.85C110.4 205.236 122.318 218.43 146.152 218.43C169.486 218.43 181.152 205.236 181.152 178.85C181.152 152.827 169.486 139.816 146.152 139.816C122.318 139.816 110.4 152.827 110.4 178.85ZM97.0703 179.26C97.0703 146.128 113.431 129.562 146.152 129.562C178.372 129.562 194.482 146.128 194.482 179.26C194.482 212.209 178.372 228.684 146.152 228.684C113.431 228.684 97.0703 212.209 97.0703 179.26ZM213.691 190.266V130.246H226.338V190.266C226.338 209.042 235.68 218.43 254.365 218.43C273.05 218.43 282.393 209.042 282.393 190.266V130.246H295.039V190.266C295.039 215.878 281.481 228.684 254.365 228.684C227.249 228.684 213.691 215.878 213.691 190.266Z"
+                            fill="#1579BD" />
+                        <ellipse cx="86" cy="66" rx="19" ry="36" fill="#F4E8A1" />
+                        <ellipse cx="218.5" cy="66" rx="18.5" ry="36" fill="#F4E8A1" />
                         <g clip-path="url(#clip0)">
-                        <path d="M280.008 262.95C210.007 331.356 97.4056 330.058 29 260.058L39.7281 249.574C102.353 313.659 205.439 314.846 269.524 252.222L280.008 262.95Z" fill="#F4E8A1"/>
+                            <path
+                                d="M280.008 262.95C210.007 331.356 97.4056 330.058 29 260.058L39.7281 249.574C102.353 313.659 205.439 314.846 269.524 252.222L280.008 262.95Z"
+                                fill="#F4E8A1" />
                         </g>
                         <defs>
-                        <clipPath id="clip0">
-                        <rect width="177.501" height="177.501" fill="white" transform="translate(153.058 387.008) rotate(-134.34)"/>
-                        </clipPath>
+                            <clipPath id="clip0">
+                                <rect width="177.501" height="177.501" fill="white"
+                                    transform="translate(153.058 387.008) rotate(-134.34)" />
+                            </clipPath>
                         </defs>
                     </svg>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>
 
-        </div>
+    </div>
 
-        <form class="form-result global-search">
+    <form class="form-result global-search">
         {% if data %}
-            <h1>{{output_message}}</h1>
-            {% for d in data %}  
-                <br>
-                <p>{{d}}</p>
-            {% endfor %}
+        <h1>{{output_message}}</h1>
+        {% for d in data %}
+        <br>
+        <p>{{d}}</p>
+        {% endfor %}
         {% endif %}
-        </form>
+    </form>
 
 
-        <div id= "newtopcorner" >
-            <p>Project Name: {{ name }}</p>
-            <p>Student Name: ({{ netid }})</p>
-        </div>
-    </body>
+    <div id="newtopcorner">
+        <p>Project Name: {{ name }}</p>
+        <p>Student Name: ({{ netid }})</p>
+    </div>
+</body>
 
 </html>
