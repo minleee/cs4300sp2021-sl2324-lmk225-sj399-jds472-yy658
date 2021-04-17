@@ -30,6 +30,7 @@ def search():
 		for idx, (a,b) in enumerate(rankings):
 			a = (a / s) * 100
 			a = round(a, 2)
+			#hello
 			a = str(a) + '%'
 			rankings[idx] = (a, b)
 		top_5 = rankings[:5]
