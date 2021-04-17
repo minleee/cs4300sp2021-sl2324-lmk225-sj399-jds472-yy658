@@ -156,7 +156,7 @@ def cosine_score(mbti_dict, tokenized_query, idf_dict, doc_norms, tf_matrix, wor
     
   return sorted(results, key = lambda x: (-x[0], x[1]))
 
-def rank_mbtis(query: str):
+def precompute():
   mbti = pd.read_csv('data/mbti.csv')
   tokenized = tokenize_mbti(mbti)
   mbti_dict = mbti_tokenized(tokenized)
@@ -165,7 +165,10 @@ def rank_mbtis(query: str):
   words_to_analyze = output_words_to_analyze(word_dict)
   tf_matrix = create_tfmatrix(mbti_dict, words_to_analyze)
   doc_norms = compute_doc_norms(tf_matrix, idf_dict, words_to_analyze)
+  return (mbti_dict, idf_dict, doc_norms, tf_matrix, words_to_analyze)
 
+
+def rank_mbtis(mbti_dict, query, idf_dict, doc_norms, tf_matrix, words_to_analyze):
   q = valid_query(query, words_to_analyze)
   rankings = cosine_score(mbti_dict, q, idf_dict, doc_norms, tf_matrix, words_to_analyze)
   return rankings
