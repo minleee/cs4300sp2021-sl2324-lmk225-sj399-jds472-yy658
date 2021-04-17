@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="/static/main.css">
     <style>
         @media (min-width: 400px) {
-        .global-search * {
-            margin-bottom: 12px;
-        }
-        body {
-            padding-top: 15%;
-        }
+            .global-search * {
+                margin-bottom: 12px;
+            }
+
+            body {
+                padding-top: 15%;
+            }
         }
 
         body {
@@ -36,7 +37,8 @@
             border-bottom-left-radius: 16px 14px;
         }
 
-        #search, #result {
+        #search,
+        #result {
             font-size: 20px;
             color: #1579BD;
         }
@@ -93,8 +95,6 @@
             background: #f1f3f4;
             color: #1579BD;
         }
-
-        
     </style>
 
 </head>
@@ -167,41 +167,41 @@
             </div>
 
             <div id="instruction">
-                Tired of taking long tests to get your MBTI? <br>Just enter your last text message to see your most likely MBTI!
+                Tired of taking long tests to get your MBTI? <br>Just enter your last text message to see your most
+                likely MBTI!
             </div>
         </div>
 
         <br>
 
-            <div id = "flex_end" class="message_row">
-                <form class="form-inline global-search" id="search">
-                    <div class="form-group">
-                        <input id="input" type="text" name="search" class="form-control"
-                            placeholder="Place your text here">
-                    </div>
-                    <!-- <button type="submit" id="search" class="btn btn-info"> Search </button> -->
-                </form>
-                <div class="message_img">
-                    <svg width="50" height="50" viewBox="0 0 300 352" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M1.70898 130.246H15.7227L43.8867 181.311L72.4609 130.246H87.1582L49.834 193.82V228H37.1875V193.82L1.70898 130.246ZM110.4 178.85C110.4 205.236 122.318 218.43 146.152 218.43C169.486 218.43 181.152 205.236 181.152 178.85C181.152 152.827 169.486 139.816 146.152 139.816C122.318 139.816 110.4 152.827 110.4 178.85ZM97.0703 179.26C97.0703 146.128 113.431 129.562 146.152 129.562C178.372 129.562 194.482 146.128 194.482 179.26C194.482 212.209 178.372 228.684 146.152 228.684C113.431 228.684 97.0703 212.209 97.0703 179.26ZM213.691 190.266V130.246H226.338V190.266C226.338 209.042 235.68 218.43 254.365 218.43C273.05 218.43 282.393 209.042 282.393 190.266V130.246H295.039V190.266C295.039 215.878 281.481 228.684 254.365 228.684C227.249 228.684 213.691 215.878 213.691 190.266Z"
-                            fill="#1579BD" />
-                        <ellipse cx="86" cy="66" rx="19" ry="36" fill="#F4E8A1" />
-                        <ellipse cx="218.5" cy="66" rx="18.5" ry="36" fill="#F4E8A1" />
-                        <g clip-path="url(#clip0)">
-                            <path
-                                d="M280.008 262.95C210.007 331.356 97.4056 330.058 29 260.058L39.7281 249.574C102.353 313.659 205.439 314.846 269.524 252.222L280.008 262.95Z"
-                                fill="#F4E8A1" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0">
-                                <rect width="177.501" height="177.501" fill="white"
-                                    transform="translate(153.058 387.008) rotate(-134.34)" />
-                            </clipPath>
-                        </defs>
-                    </svg>
+        <div id="flex_end" class="message_row">
+            <form class="form-inline global-search" id="search">
+                <div class="form-group">
+                    <input id="input" type="text" name="search" class="form-control" placeholder="Place your text here">
                 </div>
+                <!-- <button type="submit" id="search" class="btn btn-info"> Search </button> -->
+            </form>
+            <div class="message_img">
+                <svg width="50" height="50" viewBox="0 0 300 352" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M1.70898 130.246H15.7227L43.8867 181.311L72.4609 130.246H87.1582L49.834 193.82V228H37.1875V193.82L1.70898 130.246ZM110.4 178.85C110.4 205.236 122.318 218.43 146.152 218.43C169.486 218.43 181.152 205.236 181.152 178.85C181.152 152.827 169.486 139.816 146.152 139.816C122.318 139.816 110.4 152.827 110.4 178.85ZM97.0703 179.26C97.0703 146.128 113.431 129.562 146.152 129.562C178.372 129.562 194.482 146.128 194.482 179.26C194.482 212.209 178.372 228.684 146.152 228.684C113.431 228.684 97.0703 212.209 97.0703 179.26ZM213.691 190.266V130.246H226.338V190.266C226.338 209.042 235.68 218.43 254.365 218.43C273.05 218.43 282.393 209.042 282.393 190.266V130.246H295.039V190.266C295.039 215.878 281.481 228.684 254.365 228.684C227.249 228.684 213.691 215.878 213.691 190.266Z"
+                        fill="#1579BD" />
+                    <ellipse cx="86" cy="66" rx="19" ry="36" fill="#F4E8A1" />
+                    <ellipse cx="218.5" cy="66" rx="18.5" ry="36" fill="#F4E8A1" />
+                    <g clip-path="url(#clip0)">
+                        <path
+                            d="M280.008 262.95C210.007 331.356 97.4056 330.058 29 260.058L39.7281 249.574C102.353 313.659 205.439 314.846 269.524 252.222L280.008 262.95Z"
+                            fill="#F4E8A1" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0">
+                            <rect width="177.501" height="177.501" fill="white"
+                                transform="translate(153.058 387.008) rotate(-134.34)" />
+                        </clipPath>
+                    </defs>
+                </svg>
             </div>
+        </div>
 
     </div>
 
@@ -211,7 +211,7 @@
             <h1>{{output_message}}</h1>
             {% for d in data %}
             <br>
-            <p>{{d+1}}</p>
+            <p>{{d}}</p>
             {% endfor %}
             {% endif %}
         </form>
