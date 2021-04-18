@@ -50,7 +50,7 @@ def word_count(mbti_dict):
             word_dict[word] += 1
   return word_dict
 
-def compute_idf(word_dict, n_docs, min_df=1, max_df_ratio=1):
+def compute_idf(word_dict, n_docs, min_df=1, max_df_ratio=0.9):
   # return idf score of each word
     # initialization
     idf_dict = {}
