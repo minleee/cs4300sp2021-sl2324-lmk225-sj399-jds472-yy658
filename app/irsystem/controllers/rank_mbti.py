@@ -87,7 +87,7 @@ def compute_doc_norms(index, idf, n_docs):
   
   return np.sqrt(norms)
 
-def index_search(query, index, idf, doc_norms, mbti_dict):
+def index_search(query, index, idf, doc_norms, mbti_keys):
   # query is already tokenized
   tf_q = Counter(query) 
   
@@ -126,7 +126,7 @@ def index_search(query, index, idf, doc_norms, mbti_dict):
   results = []
     
   # compute cosine similarity    
-  mbti_index = list(mbti_dict.keys())        
+  mbti_index = mbti_keys        
   for mbti in d:
       d_norm = doc_norms[mbti]
       # norm_product = q_norm * d_norm
