@@ -1,4 +1,5 @@
 import re
+import random
 import numpy as np
 import math
 import pandas as pd
@@ -150,6 +151,55 @@ def rank_mbtis(query, inv_idx, idf, doc_norms, mbti_dict):
   q = valid_query(query, idf)
   rankings = index_search(q, inv_idx, idf, doc_norms, mbti_dict)
   return rankings
+
+def rank_movies(ranks, movie_index, updated_movie, mbti_keys):
+  query_scores = np.zeros(len(mbti_keys))
+  # place more weight on top 3 mbtis
+  weight = 0.3
+  for i in range(3):
+    (a,b) = ranks[i]
+    ranks[i] = (a + weight, b)
+    weight -= 0.1
+
+  # calculate movie ranks
+  for (score, mbti) in ranks:
+    query_scores[mbti_keys.index(mbti)] = score
+  movie_score = np.dot(updated_movie, query_scores)
+  ranking_index = np.argsort((movie_score * -1))
+
+  # determine movies
+  movie_list = []
+  for i in ranking_index:
+    movie_list.append(movie_index[i])
+  return movie_list
+
+def get_characters(mbti_list, movie_list, character_dict):
+  final = []
+  for movie in movie_list:
+    characters = []
+    m = {}
+    c = 3
+    for (score, mbti) in mbti_list:
+      movie_characters_dict = character_dict[movie]
+      if (mbti in movie_characters_dict):
+        if (len(movie_characters_dict[mbti]) <= 3):
+          for character in movie_characters_dict[mbti]:
+            ch = [character[0], mbti, character[1]]
+            characters.append(ch)
+            c = c-1
+        else:
+          ch = random.choices(movie_characters_dict[mbti], k = c)
+          for x in ch:
+            val = [x[0], mbti, x[1]]
+            characters.append(val)
+            c -= 1
+      if c == 0:
+        break
+    m[movie] = characters
+    final.append(m)
+  return final
+
+
 
 
 
