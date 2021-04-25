@@ -155,8 +155,10 @@ def rank_mbtis(query, inv_idx, idf, doc_norms, mbti_dict):
 def rank_movies(ranks, movie_index, updated_movie, mbti_keys):
   query_scores = np.zeros(len(mbti_keys))
   # place more weight on top 3 mbtis
+  len_ranks = len(ranks)
   weight = 0.3
-  for i in range(3):
+  for i in range(len(ranks)):
+  #   if 
     (a,b) = ranks[i]
     ranks[i] = (a + weight, b)
     weight -= 0.1
