@@ -15,7 +15,6 @@
                 background-image: linear-gradient(white, #c6edff);
             }
             .btn{
-                /* border-color: red; */
                 font-size: 20px;
                 display: inline-block;
             }
@@ -24,13 +23,17 @@
                 color: #1579BD;
                 font-weight: bold;
             }
-            
-          
         }
        
-        body {
-            width: 100%;
+        html {
             height: 100%;
+        }
+        body {
+            font-family: sans-serif;
+            height: 100%;
+            /* margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed; */
         }
 
         #newtopcorner {
@@ -113,13 +116,50 @@
             color: black;
         }
 
+        #mbti_results {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mbti_results, .movie_results {
+            background: white;
+            border-radius: 20px;
+        }
+
+        .movie_results {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding: 16px;
+            margin: 16px;
+        }
+
+        .movie_title {
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        .character {
+            margin: 20px;
+        }
+
     </style>
+
+    <script>
+        // let search_button = document.getElementById("search_button");
+        // console.log(search_button);
+        // document.getElementById("#search_button").on("click", () => {
+        //     console.log("click")
+            // window.scrollTo(0, 400);
+        // })
+
+    </script>
 
 </head>
 
 <body>
     <div class="logo" style="text-align:center; padding-top:0">
-        <svg width="160" height="160" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg"
+        <svg id = "main_icon" width="160" height="160" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg"
             style="margin-bottom: 50px">
             <g opacity="0.8">
                 <rect y="2.10193" width="39.9521" height="190.948" fill="#F9D1C5" />
@@ -146,8 +186,7 @@
             <path
                 d="M0.46875 290.432L17.2266 206.643H33.3398L49.043 270.218L89.5898 206.643H105.117L88.3594 290.432H74.0039L85.6641 232.073L51.2695 290.432H38.0273L26.4844 232.073L14.8242 290.432H0.46875ZM123.926 248.303C123.926 270.921 134.141 282.229 154.57 282.229C174.57 282.229 184.57 270.921 184.57 248.303C184.57 225.999 174.57 214.846 154.57 214.846C134.141 214.846 123.926 225.999 123.926 248.303ZM112.5 248.655C112.5 220.257 126.523 206.057 154.57 206.057C182.188 206.057 195.996 220.257 195.996 248.655C195.996 276.897 182.188 291.018 154.57 291.018C126.523 291.018 112.5 276.897 112.5 248.655ZM203.555 290.432L220.312 206.643H259.57C275.508 206.643 282.168 213.147 279.551 226.155C277.676 235.686 271.133 242.503 259.922 246.604C270.586 248.675 274.863 255.022 272.754 265.647C269.434 282.171 259.043 290.432 241.582 290.432H203.555ZM243.633 276.956C250.508 276.956 254.648 273.44 256.055 266.409C257.812 257.698 253.555 253.343 243.281 253.343H238.594L240.586 243.323C253.906 241.175 261.426 235.784 263.145 227.151C264.082 222.464 261.66 220.12 255.879 220.12H233.145L221.777 276.956H243.633ZM303.105 206.643V290.432H292.266V206.643H303.105ZM379.629 206.643V215.432H335.684V243.557H377.578V252.346H335.684V281.643H380.508V290.432H324.844V206.643H379.629ZM458.965 206.643L456.27 220.12H432.246L418.184 290.432H402.656L416.719 220.12H392.695L395.391 206.643H458.965ZM483.34 206.643L466.582 290.432H451.055L467.812 206.643H483.34Z"
                 fill="#1579BD" />
-        </svg>
-        
+        </svg></a>
 
     </div>
 
@@ -197,10 +236,9 @@
         <div id="flex_end" class="message_row">
             <form class="form-inline global-search" id="search">
                 <textarea id="input" rows="4" cols="50" name="search" class="form-control" placeholder="Place your text here"></textarea>
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" onClick="document.getElementById('#results').scrollIntoView();" class="btn btn-primary" id="search_button">Search</button>
             </form>
            
-            
             <div class="message_img">
                 <svg width="65" height="65" viewBox="0 0 300 352" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -224,18 +262,45 @@
         </div>
 
     </div>
-
+    <a href="#results">
     <div class="results">
         <form class="form-result global-search" id="result">
             {% if data %}
             <h1>{{output_message}}</h1>
-            {% for d in data %}
+
             <br>
-            <p>{{d}}</p>
+            <h2>Here is your most likely MBTIs!</h2>
+            <div id = "mbti_results">
+                {% for d in data[0] %}
+                    <p>{{d[1]}} {{d[0]}}</p>
+                {% endfor %}
+            </div>
+
+            <h2>Based on your top MBTI ({{data[0][0][1]}}), here are the movies most similar to you!</h2>
+            {% for d in data[1] %}
+            <div class = "movie_results">
+                <div class = "each_movie">
+                    <div class="movie_title">{{d["movie"]}}</div>
+                    <br>
+                    {% for character in d["characters"] %}
+                    <div class="character">
+                        <br>
+                        <p>Character: {{character[0]}}</p>
+                        <br>
+                        <p>MBTI: {{character[1]}}</p>
+                        <br>
+                        <img src={{character[2]}}></img>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+
             {% endfor %}
+
             {% endif %}
         </form>
-    </div>
+    </div></a>
 
 
     <div id="newtopcorner">

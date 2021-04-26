@@ -41,7 +41,7 @@ def search():
 			top_mbti = rankings[:5]
 			top_5 = movies[:5]
 			combined = m.get_characters(top_mbti, top_5, character_dict)
-			top_5 = combined[:5]
+			top_5 = (rankings[:5], combined[:5])
 		# 	s = sum([pair[0] for pair in rankings])
 		# 	for idx, (a,b) in enumerate(rankings):
 		# 		a = (a / s) * 100
@@ -54,6 +54,5 @@ def search():
 
 
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=top_5)
-
 
 

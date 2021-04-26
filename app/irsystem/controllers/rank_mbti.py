@@ -197,7 +197,8 @@ def get_characters(mbti_list, movie_list, character_dict):
             c -= 1
       if c == 0:
         break
-    m[movie] = characters
+    m["movie"] = movie
+    m["characters"] = characters
     final.append(m)
   return final
 
