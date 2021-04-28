@@ -55,4 +55,10 @@ def search():
 
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=top_5)
 
+@irsystem.route('/', methods=['GET'], defaults={'path': ''})
+@irsystem.route('/<path:path>')
+def index(path):
+    return render_template("about.html")
+
+
 

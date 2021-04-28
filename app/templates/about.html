@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/main.css">
+    <style>
+    @media (min-width: 400px) {
+    
+        body {
+            padding: 10%;
+            background-image: linear-gradient(white, #c6edff);
+            height: 100%;
+            margin: 0 auto;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: sans-serif;
+        }
+
+        #main{
+            text-align: center;
+        }
+        #mbti{
+            display: flex;
+            flex-direction: row;
+        }
+        .first, .second{
+            padding: 10px;
+        }
+        
+
+   
+    }
+   
+    </style>
+  </head>
+  <body>
+    <a href = "/">Home</a>
+    <h1 id = "main">About</h1>
+    <!-- Source: https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator -->
+    <h2>What is MBTI?</h2>
+    <p id = "mbti_description">
+        The Myers–Briggs Type Indicator (MBTI) is an introspective self-report questionnaire indicating differing 
+        psychological preferences in how people perceive the world and make decisions.
+        The test attempts to assign four categories: introversion or extraversion, sensing or intuition, thinking or feeling, judging or perceiving.
+    </p>
+    <h2> Why did we make this?</h2>
+    <p> In order to find out one's MBTI, one needs to spend about 30 minutes. Rather than spending long time to get one's MBTI, we wanted
+        to give the user a quick estimation of MBTI based on their last text message or social media post.
+    </p>
+    <h2> How do I use this?</h2>
+    <p> In the input box, enter in at least 3 (or more!) text message that you last sent or your last social media post. It could even be a phrase
+        that you use a lot. Then, we will give your top 5 possible MBTIs. Additionally, taking your top MBTI, we will also give 
+        movie recommendations in which there are a lot of characters with the same MBTI as you. By having characters with the same MBTI as you,
+        you will be able to relate to each other!
+    </p>
+
+    <!-- Source: https://www.myersbriggs.org/my-mbti-personality-type/mbti-basics/the-16-mbti-types.htm -->
+    <h2>Description of each MBTI:</h2>
+    <div id = "mbti">
+       
+        <div class = "first">
+        <div class = "istj">
+            <h4>ISTJ</h4>
+            <p>Quiet, serious, earn success by thoroughness and dependability. Practical, matter-of-fact, realistic, and responsible. Decide logically what should be done and work toward it steadily, regardless of distractions. Take pleasure in making everything orderly and organized - their work, their home, their life. Value traditions and loyalty.</p>
+        </div>
+        <div class = "isfj">
+            <h4>ISFJ</h4>
+            <p>Quiet, friendly, responsible, and conscientious. Committed and steady in meeting their obligations. Thorough, painstaking, and accurate. Loyal, considerate, notice and remember specifics about people who are important to them, concerned with how others feel. Strive to create an orderly and harmonious environment at work and at home.</p>
+        </div>
+        <div class = "infj">
+            <h4>INFJ</h4>
+            <p>Seek meaning and connection in ideas, relationships, and material possessions. Want to understand what motivates people and are insightful about others. Conscientious and committed to their firm values. Develop a clear vision about how best to serve the common good. Organized and decisive in implementing their vision.</p>
+        </div>
+        <div class = "intj">
+            <h4>INTJ</h4>
+            <p>Have original minds and great drive for implementing their ideas and achieving their goals. Quickly see patterns in external events and develop long-range explanatory perspectives. When committed, organize a job and carry it through. Skeptical and independent, have high standards of competence and performance - for themselves and others.</p>
+        </div>
+        <div class = "istp">
+            <h4>ISTP</h4>
+            <p> Tolerant and flexible, quiet observers until a problem appears, then act quickly to find workable solutions. Analyze what makes things work and readily get through large amounts of data to isolate the core of practical problems. Interested in cause and effect, organize facts using logical principles, value efficiency.</p>
+        </div>
+        <div class = "isfp">
+            <h4>ISFP</h4>
+            <p>Quiet, friendly, sensitive, and kind. Enjoy the present moment, what's going on around them. Like to have their own space and to work within their own time frame. Loyal and committed to their values and to people who are important to them. Dislike disagreements and conflicts, do not force their opinions or values on others.</p>
+        </div>
+        <div class = "infp">
+            <h4>INFP</h4>
+            <p>Idealistic, loyal to their values and to people who are important to them. Want an external life that is congruent with their values. Curious, quick to see possibilities, can be catalysts for implementing ideas. Seek to understand people and to help them fulfill their potential. Adaptable, flexible, and accepting unless a value is threatened.</p>
+        </div>
+        <div class = "intp">
+            <h4>INTP</h4>
+            <p>Seek to develop logical explanations for everything that interests them. Theoretical and abstract, interested more in ideas than in social interaction. Quiet, contained, flexible, and adaptable. Have unusual ability to focus in depth to solve problems in their area of interest. Skeptical, sometimes critical, always analytical.</p>
+        </div>
+        </div>
+
+        <div class ="second">
+        <div class = "estp">
+            <h4>ESTP</h4>
+            <p>
+                Flexible and tolerant, they take a pragmatic approach focused on immediate results. Theories and conceptual explanations bore them - they want to act energetically to solve the problem. Focus on the here-and-now, spontaneous, enjoy each moment that they can be active with others. Enjoy material comforts and style. Learn best through doing.
+            </p>
+        </div>
+        <div class = "esfp">
+            <h4>ESFP</h4>
+            <p>Outgoing, friendly, and accepting. Exuberant lovers of life, people, and material comforts. Enjoy working with others to make things happen. Bring common sense and a realistic approach to their work, and make work fun. Flexible and spontaneous, adapt readily to new people and environments. Learn best by trying a new skill with other peopl</p>
+        </div>
+        <div class = "enfp">
+            <h4>ENFP</h4>
+            <p>Warmly enthusiastic and imaginative. See life as full of possibilities. Make connections between events and information very quickly, and confidently proceed based on the patterns they see. Want a lot of affirmation from others, and readily give appreciation and support. Spontaneous and flexible, often rely on their ability to improvise and their verbal fluency.</p>
+        </div>
+        <div class = "entp">
+            <h4>ENTP</h4>
+            <p>Quick, ingenious, stimulating, alert, and outspoken. Resourceful in solving new and challenging problems. Adept at generating conceptual possibilities and then analyzing them strategically. Good at reading other people. Bored by routine, will seldom do the same thing the same way, apt to turn to one new interest after another.
+            </p>
+        </div>
+        <div class = "estj">
+            <h4>ESTJ</h4>
+            <p>
+                Practical, realistic, matter-of-fact. Decisive, quickly move to implement decisions. Organize projects and people to get things done, focus on getting results in the most efficient way possible. Take care of routine details. Have a clear set of logical standards, systematically follow them and want others to also. Forceful in implementing their plans.
+            </p>
+        </div>
+        <div class = "esfj">
+            <h4>ESFJ</h4>
+            <p>Warmhearted, conscientious, and cooperative. Want harmony in their environment, work with determination to establish it. Like to work with others to complete tasks accurately and on time. Loyal, follow through even in small matters. Notice what others need in their day-by-day lives and try to provide it. Want to be appreciated for who they are and for what they contribute.</p>
+        </div>
+        <div class = "enfj">
+            <h4>ENFJ</h4>
+            <p>Warm, empathetic, responsive, and responsible. Highly attuned to the emotions, needs, and motivations of others. Find potential in everyone, want to help others fulfill their potential. May act as catalysts for individual and group growth. Loyal, responsive to praise and criticism. Sociable, facilitate others in a group, and provide inspiring leadership.</p>
+        </div>
+        <div class = "entj">
+            <h4>ENTJ</h4>
+            <p>Frank, decisive, assume leadership readily. Quickly see illogical and inefficient procedures and policies, develop and implement comprehensive systems to solve organizational problems. Enjoy long-term planning and goal setting. Usually well informed, well read, enjoy expanding their knowledge and passing it on to others. Forceful in presenting their ideas.</p>
+        </div>
+        </div>
+      
+    </div>
+    <p> <a style = "font-size: smaller; color: grey;" href ="https://www.myersbriggs.org/my-mbti-personality-type/mbti-basics/the-16-mbti-types.htm">Source: The Myers & Briggs Foundation</a></p>
+ 
+    
+</body>
+</html>
