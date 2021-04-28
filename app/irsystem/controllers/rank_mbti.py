@@ -112,15 +112,19 @@ def index_search(query, index, idf, doc_norms, mbti_keys):
   # initialization
   # dictionary of cosine similarity numerator     
   d = {}
+  words = {}
     
   # compute cosine similarity numerator
   for term, score in tfidf_query:
       invidx_list = index[term]
       for mbti, tf in invidx_list:
           if mbti not in d:
-              d[mbti] = score * (tf * idf[term])
+              scores = score * (tf * idf[term])
+              d[mbti] = scores
+              words[mbti] = [(scores, term)]
           else:
               d[mbti] += score * (tf * idf[term])
+              words[mbti] += [(scores, term)]
     
   # initialization
   # list of tuples of cosine similarity score and doc
@@ -133,10 +137,13 @@ def index_search(query, index, idf, doc_norms, mbti_keys):
       # norm_product = q_norm * d_norm
       if d_norm != 0:
           sim = d[mbti] / d_norm
-          results.append((sim, mbti_index[mbti]))
+          w = words[mbti]
+          sorted_words = sorted(w, key = lambda x: (-x[0]))
+          sorted_words = [i[1] for i in sorted_words]
+          results.append((sim, mbti_index[mbti], sorted_words))
         
     
-  return sorted(results, key = lambda x: (-x[0], x[1]))
+  return sorted(results, key = lambda x: (-x[0]))
 
 def precompute():
   mbti = pd.read_csv('data/mbti.csv')
@@ -159,12 +166,12 @@ def rank_movies(ranks, movie_index, updated_movie, mbti_keys):
   weight = 0.3
   for i in range(len(ranks)):
   #   if 
-    (a,b) = ranks[i]
-    ranks[i] = (a + weight, b)
+    (a,b,c) = ranks[i]
+    ranks[i] = (a + weight, b, c)
     weight -= 0.1
 
   # calculate movie ranks
-  for (score, mbti) in ranks:
+  for (score, mbti, words) in ranks:
     query_scores[mbti_keys.index(mbti)] = score
   movie_score = np.dot(updated_movie, query_scores)
   ranking_index = np.argsort((movie_score * -1))
@@ -190,7 +197,7 @@ def get_characters(mbti_list, movie_list, character_dict):
             characters.append(ch)
             c = c-1
         else:
-          ch = random.choices(movie_characters_dict[mbti], k = c)
+          ch = random.sample(movie_characters_dict[mbti], k = c)
           for x in ch:
             val = [x[0], mbti, x[1]]
             characters.append(val)
