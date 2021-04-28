@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="/static/bootstrap.min.css">
     <link rel="stylesheet" href="/static/main.css">
     <style>
-      
         @media (min-width: 400px) {
             .global-search * {
                 margin-bottom: 12px;
@@ -14,20 +13,23 @@
                 padding-top: 8%;
                 background-image: linear-gradient(white, #c6edff);
             }
-            .btn{
+
+            .btn {
                 font-size: 20px;
                 display: inline-block;
             }
+
             #main_desc {
                 font-size: 35px;
                 color: #1579BD;
                 font-weight: bold;
             }
         }
-       
+
         html {
             height: 100%;
         }
+
         body {
             font-family: sans-serif;
             height: 100%;
@@ -67,7 +69,7 @@
             display: inline-block;
             border-bottom-right-radius: 16px 14px;
         }
-    
+
 
         .results {
             display: block;
@@ -121,7 +123,8 @@
             flex-direction: column;
         }
 
-        #mbti_results, .movie_results {
+        #mbti_results,
+        .movie_results {
             background: white;
             border-radius: 20px;
         }
@@ -142,7 +145,6 @@
         .character {
             margin: 20px;
         }
-
     </style>
 
     <script>
@@ -159,8 +161,8 @@
 
 <body>
     <div class="logo" style="text-align:center; padding-top:0">
-        <svg id = "main_icon" width="160" height="160" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg"
-            style="margin-bottom: 50px">
+        <svg id="main_icon" width="160" height="160" viewBox="0 0 500 500" fill="none"
+            xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 50px">
             <g opacity="0.8">
                 <rect y="2.10193" width="39.9521" height="190.948" fill="#F9D1C5" />
                 <rect width="38.1897" height="199.76"
@@ -190,7 +192,7 @@
 
     </div>
 
-    <p class = "text-center my-5" id = "main_desc">Find your best MBTIs</p>
+    <p class="text-center my-5" id="main_desc">Find your best MBTIs</p>
 
     <div class="messages">
         <div id="flex_start" class="message_row">
@@ -235,10 +237,12 @@
 
         <div id="flex_end" class="message_row">
             <form class="form-inline global-search" id="search">
-                <textarea id="input" rows="4" cols="50" name="search" class="form-control" placeholder="Place your text here"></textarea>
-                <button type="submit" onClick="document.getElementById('#results').scrollIntoView();" class="btn btn-primary" id="search_button">Search</button>
+                <textarea id="input" rows="4" cols="50" name="search" class="form-control"
+                    placeholder="Place your text here"></textarea>
+                <button type="submit" onClick="document.getElementById('#results').scrollIntoView();"
+                    class="btn btn-primary" id="search_button">Search</button>
             </form>
-           
+
             <div class="message_img">
                 <svg width="65" height="65" viewBox="0 0 300 352" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -263,44 +267,45 @@
 
     </div>
     <a href="#results">
-    <div class="results">
-        <form class="form-result global-search" id="result">
-            {% if data %}
-            <h1>{{output_message}}</h1>
+        <div class="results">
+            <form class="form-result global-search" id="result">
+                {% if data %}
+                <h1>{{output_message}}</h1>
 
-            <br>
-            <h2>Here is your most likely MBTIs!</h2>
-            <div id = "mbti_results">
-                {% for d in data[0] %}
+                <br>
+                <h2>Here is your most likely MBTIs!</h2>
+                <div id="mbti_results">
+                    {% for d in data[0] %}
                     <p>{{d[1]}} {{d[0]}}</p>
-                {% endfor %}
-            </div>
-
-            <h2>Based on your top MBTI ({{data[0][0][1]}}), here are the movies most similar to you!</h2>
-            {% for d in data[1] %}
-            <div class = "movie_results">
-                <div class = "each_movie">
-                    <div class="movie_title">{{d["movie"]}}</div>
-                    <br>
-                    {% for character in d["characters"] %}
-                    <div class="character">
-                        <br>
-                        <p>Character: {{character[0]}}</p>
-                        <br>
-                        <p>MBTI: {{character[1]}}</p>
-                        <br>
-                        <img src={{character[2]}}></img>
-                    </div>
                     {% endfor %}
-                    
                 </div>
-            </div>
 
-            {% endfor %}
+                <h2>Based on your top MBTIs, here are the movies most similar to you!</h2>
+                {% for d in data[1] %}
+                <div class="movie_results">
+                    <div class="each_movie">
+                        <div class="movie_title">{{d["movie"]}}</div>
+                        <br>
+                        {% for character in d["characters"] %}
+                        <div class="character">
+                            <br>
+                            <p>Character: {{character[0]}}</p>
+                            <br>
+                            <p>MBTI: {{character[1]}}</p>
+                            <br>
+                            <img src={{character[2]}}></img>
+                        </div>
+                        {% endfor %}
 
-            {% endif %}
-        </form>
-    </div></a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                {% endif %}
+            </form>
+        </div>
+    </a>
 
 
     <div id="newtopcorner">
