@@ -157,15 +157,16 @@
 
         .bold {
             font-weight: bolder;
-        }   
+        } 
+       
     </style>
-   
 
   
 
 </head>
 
 <body>
+    <div class = "question">
     <p><a id ="toAbout" href = "about.html"> About </a></p>
     <div class="logo" style="text-align:center; padding-top:0">
         <a href = "/">
@@ -276,6 +277,8 @@
         </div>
 
     </div>
+</div>
+  
         <div id="results">
             <form class="form-result global-search" id="result">
                 {% if data|length != 0  %}
@@ -328,8 +331,9 @@
 
             </form>
         </div>
+
     <script>
-        
+        document.getElementById("result").scrollIntoView();
         // let search_button = document.getElementById("search_button");
         // console.log(search_button);
         // document.getElementById("#search_button").on("click", () => {
