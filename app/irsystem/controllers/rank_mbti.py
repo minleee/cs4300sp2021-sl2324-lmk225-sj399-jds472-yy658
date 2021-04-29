@@ -142,8 +142,9 @@ def index_search(query, index, idf, doc_norms, mbti_keys):
           sorted_words = [i[1] for i in sorted_words]
           results.append((sim, mbti_index[mbti], sorted_words))
         
-    
-  return sorted(results, key = lambda x: (-x[0]))
+  results = sorted(results, key = lambda x: (-x[0]))
+
+  return [ (round(a,4),b,c) for (a,b,c) in results ]
 
 def precompute():
   mbti = pd.read_csv('data/mbti.csv')
