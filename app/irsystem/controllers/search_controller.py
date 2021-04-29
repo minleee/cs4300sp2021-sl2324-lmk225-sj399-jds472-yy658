@@ -35,9 +35,7 @@ def search():
 	else:
 		output_message = "Your search: " + query
 		rankings = m.rank_mbtis(query, inv_idx, idf, doc_norms, mbti_keys)
-		# print(rankings)
-		movies = m.rank_movies(rankings, movie_index, updated_movie, mbti_keys)
-		top_5 = []
+		movies = m.rank_movies(rankings.copy(), movie_index, updated_movie, mbti_keys)
 		if rankings != [] and rankings[0][0] !=0:
 			top_mbti = [(i[0], i[1]) for i in rankings][:5]
 			# top words in query 
@@ -52,10 +50,8 @@ def search():
 		# 		a = str(a) + '%'
 		# 		rankings[idx] = (a, b)
 		# 	top_5 = rankings[:5]
-		# else:
-		# 	# top_5 = [[['No results found. Please try again.']]]
-		# 	top_5 = [[[]]]
-
+		else:
+			top_5 = [[['No results found. Please try again.']]]
 
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=top_5)
 
