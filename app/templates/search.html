@@ -153,6 +153,7 @@
             width:200px;
         }
     </style>
+   
 
   
 
@@ -242,7 +243,7 @@
         <div id="flex_end" class="message_row">
             <form class="form-inline global-search" id="search">
                 <textarea id="input" rows="4" cols="50" name="search" class="form-control"
-                    placeholder="Place your text here"></textarea>
+                    placeholder="Place your text here" minlength="15"></textarea>
                 <button type="submit" class="btn btn-primary" id="search_button">Search</button>
             </form>
 
@@ -297,7 +298,7 @@
                             <br>
                             <p>MBTI: {{character[1]}}</p>
                             <br>
-                            <img src={{character[2]}}></img>
+                            <img src="{{character[2]}}"></img>
                         </div>
                         {% endfor %}
 
@@ -310,7 +311,8 @@
                 {% if data|length == 0  %}
 
                 <p id = "no_result"> No results found. Please try again.</p>
-                 {% endif %}
+                 
+                {% endif %}
 
             </form>
         </div>
@@ -324,13 +326,35 @@
             // window.scrollTo(0, 400);
         // })
         
-        no_result = document.getElementById("no_result");
+        // no_result = document.getElementById("no_result");
      
-        no_result.style.display = "none";
-        search = document.getElementById("search_button");
-        search.addEventListener("click", function(){
-            no_result.style.display = "block";  
+        // no_result.style.display = "none";
+        // search = document.getElementById("search_button");
+        // search.addEventListener("click", function(){
+        //     no_result.style.display = "block";  
+        // });
+     
+        let form_valid;
+        
+        let form = document.getElementById("search");
+       
+        form.addEventListener("submit", () => {
+            console.log("submitted")
+            let get_input = document.getElementById("input").val();
+            get_input = get_input.trim()
+            console.log(get_input)
+            if (input.split(" ").length < 5) {
+                form_valid = False;
+            } else {
+                form_valid = True;
+            }
         });
+        if (form_valid) {
+            // console.log("valid")
+        } else {
+            // console.log("invalid")
+        }
+ 
        
     </script>
 
