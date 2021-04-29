@@ -37,13 +37,14 @@ def search():
 		rankings = m.rank_mbtis(query, inv_idx, idf, doc_norms, mbti_keys)
 		# print(rankings)
 		movies = m.rank_movies(rankings, movie_index, updated_movie, mbti_keys)
+		top_5 = []
 		if rankings != [] and rankings[0][0] !=0:
 			top_mbti = [(i[0], i[1]) for i in rankings][:5]
 			# top words in query 
 			top_words = [i[2] for i in rankings][:5]
 			top_5 = movies[:5]
 			combined = m.get_characters(top_mbti, top_5, character_dict)
-			top_5 = (rankings[:5], combined[:5])
+			top_5 = (rankings[:5], combined[:5], top_words)
 		# 	s = sum([pair[0] for pair in rankings])
 		# 	for idx, (a,b) in enumerate(rankings):
 		# 		a = (a / s) * 100
@@ -51,8 +52,9 @@ def search():
 		# 		a = str(a) + '%'
 		# 		rankings[idx] = (a, b)
 		# 	top_5 = rankings[:5]
-		else:
-			top_5 = [[['No results found. Please try again.']]]
+		# else:
+		# 	# top_5 = [[['No results found. Please try again.']]]
+		# 	top_5 = [[[]]]
 
 
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=top_5)

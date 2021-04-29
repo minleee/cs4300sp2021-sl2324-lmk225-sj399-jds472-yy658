@@ -149,17 +149,12 @@
         #toHome{
             padding: 10%;
         }
+        img{
+            width:200px;
+        }
     </style>
 
-    <script>
-        // let search_button = document.getElementById("search_button");
-        // console.log(search_button);
-        // document.getElementById("#search_button").on("click", () => {
-        //     console.log("click")
-            // window.scrollTo(0, 400);
-        // })
-
-    </script>
+  
 
 </head>
 
@@ -248,8 +243,7 @@
             <form class="form-inline global-search" id="search">
                 <textarea id="input" rows="4" cols="50" name="search" class="form-control"
                     placeholder="Place your text here"></textarea>
-                <button type="submit" onClick="document.getElementById('#results').scrollIntoView();"
-                    class="btn btn-primary" id="search_button">Search</button>
+                <button type="submit" class="btn btn-primary" id="search_button">Search</button>
             </form>
 
             <div class="message_img">
@@ -278,14 +272,15 @@
     <a href="#results">
         <div class="results">
             <form class="form-result global-search" id="result">
-                {% if data %}
+                {% if data|length != 0  %}
                 <h1>{{output_message}}</h1>
 
                 <br>
                 <h2>Here is your most likely MBTIs!</h2>
                 <div id="mbti_results">
                     {% for d in data[0] %}
-                    <p>{{d[1]}} {{d[0]}}</p>
+                    <p>{{d[1]}} {{d[0]}}  &emsp; &emsp;  Keyword: {{d[2]}}</p>
+                
                     {% endfor %}
                 </div>
 
@@ -310,11 +305,34 @@
                 </div>
 
                 {% endfor %}
-
                 {% endif %}
+
+                {% if data|length == 0  %}
+
+                <p id = "no_result"> No results found. Please try again.</p>
+                 {% endif %}
+
             </form>
         </div>
     </a>
+
+    <script>
+        // let search_button = document.getElementById("search_button");
+        // console.log(search_button);
+        // document.getElementById("#search_button").on("click", () => {
+        //     console.log("click")
+            // window.scrollTo(0, 400);
+        // })
+        
+        no_result = document.getElementById("no_result");
+     
+        no_result.style.display = "none";
+        search = document.getElementById("search_button");
+        search.addEventListener("click", function(){
+            no_result.style.display = "block";  
+        });
+       
+    </script>
 
 
     <div id="newtopcorner">
