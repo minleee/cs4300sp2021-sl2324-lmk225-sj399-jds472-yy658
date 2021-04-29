@@ -10,7 +10,7 @@
             }
 
             body {
-                padding-top: 8%;
+                padding-top: 7%;
                 background-image: linear-gradient(white, #c6edff);
             }
 
@@ -119,6 +119,7 @@
         }
 
         #mbti_results {
+            padding-top: 20px;
             display: flex;
             flex-direction: column;
         }
@@ -153,8 +154,10 @@
         img{
             width:200px;
         }
-        
-       
+
+        .bold {
+            font-weight: bolder;
+        }   
     </style>
    
 
@@ -163,7 +166,7 @@
 </head>
 
 <body>
-    <a id ="toAbout" href = "about.html"> About </a>
+    <p><a id ="toAbout" href = "about.html"> About </a></p>
     <div class="logo" style="text-align:center; padding-top:0">
         <a href = "/">
         <svg id="main_icon" width="160" height="160" viewBox="0 0 500 500" fill="none"
@@ -197,7 +200,7 @@
 
     </div>
 
-    <p class="text-center my-5" id="main_desc">Find your best MBTIs</p>
+    <p class="text-center my-5" id="main_desc">Find your top MBTIs</p>
 
     <div class="messages">
         <div id="flex_start" class="message_row">
@@ -273,17 +276,20 @@
         </div>
 
     </div>
-        <div class="results">
+        <div id="results">
             <form class="form-result global-search" id="result">
                 {% if data|length != 0  %}
                 <h1>{{output_message}}</h1>
 
                 <br>
-                <h2>Here is your most likely MBTIs!</h2>
+                <h2>Here are your most likely MBTIs!</h2>
                 <div id="mbti_results">
                     {% for d in data[0] %}
-                    <p>{{d[1]}} {{d[0]}}  &emsp; &emsp;  
-                    Keyword: 
+                    <p>
+                        {{loop.index}}.
+                        <span class="bold">MBTI</span>: {{d[1]}} &nbsp; 
+                        <span class="bold">Score</span>: {{d[0]}}  &nbsp; 
+                        <span class="bold">Keywords</span>: 
                         {% for keyword in d[2] %}
                             {{keyword}}
                         {% endfor %}
@@ -300,9 +306,9 @@
                         {% for character in d["characters"] %}
                         <div class="character">
                             <br>
-                            <p>Character: {{character[0]}}</p>
+                            <p><span class="bold">Character</span>: {{character[0]}}</p>
                             <br>
-                            <p>MBTI: {{character[1]}}</p>
+                            <p><span class="bold">MBTI</span>: {{character[1]}}</p>
                             <br>
                             <img src="{{character[2]}}"></img>
                         </div>
@@ -322,9 +328,8 @@
 
             </form>
         </div>
- 
-
     <script>
+        
         // let search_button = document.getElementById("search_button");
         // console.log(search_button);
         // document.getElementById("#search_button").on("click", () => {
@@ -342,26 +347,24 @@
      
         let form_valid;
         
-        let form = document.getElementById("search");
+        // let form = document.getElementById("search");
        
-        form.addEventListener("submit", () => {
-            console.log("submitted")
-            let get_input = document.getElementById("input").val();
-            get_input = get_input.trim()
-            console.log(get_input)
-            if (input.split(" ").length < 5) {
-                form_valid = False;
-            } else {
-                form_valid = True;
-            }
-        });
-        if (form_valid) {
-            // console.log("valid")
-        } else {
-            // console.log("invalid")
-        }
- 
-       
+        // form.addEventListener("submit", () => {
+        //     console.log("submitted")
+        //     let get_input = document.getElementById("input").val();
+        //     get_input = get_input.trim()
+        //     console.log(get_input)
+        //     if (input.split(" ").length < 5) {
+        //         form_valid = False;
+        //     } else {
+        //         form_valid = True;
+        //     }
+        // });
+        // if (form_valid) {
+        //     // console.log("valid")
+        // } else {
+        //     // console.log("invalid")
+        // }
     </script>
 
     
