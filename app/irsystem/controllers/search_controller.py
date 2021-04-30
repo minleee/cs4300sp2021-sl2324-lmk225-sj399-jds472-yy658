@@ -44,7 +44,7 @@ def search():
 			combined = m.get_characters(top_mbti, top_5, character_dict)
 			top_5 = (rankings[:5], combined[:5], top_words)
 
-			m.rocchio_update('qsxhcwe', ['ISTJ'], ['INTJ'], idf, a = 0.3, b = 0.3, c = 0.8)
+			# m.rocchio_update(query, ['ESTJ', 'ENFP'], ['ENFJ', 'ENTP', 'INFP'], idf)
 		# 	s = sum([pair[0] for pair in rankings])
 		# 	for idx, (a,b) in enumerate(rankings):
 		# 		a = (a / s) * 100

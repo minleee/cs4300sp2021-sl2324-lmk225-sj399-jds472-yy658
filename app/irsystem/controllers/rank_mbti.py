@@ -211,7 +211,7 @@ def get_characters(mbti_list, movie_list, character_dict):
     final.append(m)
   return final
 
-def rocchio_update(query, rel, nrel, idf, a = 0.3, b = 0.3, c = 0.8):
+def rocchio_update(query, rel, nrel, idf, a = 0.3, b = 0.8, c = 0.3):
   # with idf instead of tf-idf for now
   q = valid_query(query, idf)
 
