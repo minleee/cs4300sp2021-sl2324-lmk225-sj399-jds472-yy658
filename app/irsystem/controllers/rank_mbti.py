@@ -4,6 +4,7 @@ import numpy as np
 import math
 import pandas as pd
 from collections import Counter
+import json
 
 def tokenize(text):
   """Returns a list of words that make up the text.
@@ -210,7 +211,38 @@ def get_characters(mbti_list, movie_list, character_dict):
     final.append(m)
   return final
 
+def rocchio_update(query, rel, nrel, idf, a = 0.3, b = 0.3, c = 0.8):
+  # with idf instead of tf-idf for now
+  q = valid_query(query, idf)
 
+  q_vector = np.zeros(len(q))
+  for idx, term in enumerate(q):
+    q_vector[idx]= idf[term]
+  
+  updated_q = np.zeros(len(q_vector))
+
+  first = a * q_vector
+
+  second = np.zeros(len(q_vector))
+  if len(rel) != 0:
+    for r in rel:
+        rel_vector = q_vector
+        second = np.add(second, rel_vector)
+    second = (b / len(rel)) * second
+
+  third = np.zeros(len(q_vector))
+  if len(nrel) != 0:
+      for nr in nrel:
+          nrel_vector = q_vector
+          third = np.add(third, nrel_vector)
+      third = (c / len(nrel)) * third
+
+  # updated query
+  updated_q = np.clip(first + second - third, a_min = 0, a_max = None)
+
+  for idx, term in enumerate(q):
+    idf[term] = updated_q[idx]
+  json.dump(idf, open('data/idf.json', 'w'))
 
 
 
