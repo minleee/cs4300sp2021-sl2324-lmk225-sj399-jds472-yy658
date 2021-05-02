@@ -158,6 +158,26 @@
         .bold {
             font-weight: bolder;
         } 
+
+        .feedback {
+            width: 20px;
+        }
+
+        .feedback_button {
+            width: 33px;
+            height: 33px;
+            padding-top: 2px;
+            padding-bottom: 0px;
+        }
+
+        #description {
+            width: 70%;
+            margin: 0 auto;
+            text-align: left;
+            color: #1579BD;
+        }
+
+
        
     </style>
 
@@ -167,7 +187,7 @@
 
 <body>
     <div class = "question">
-    <p><a id ="toAbout" href = "about.html"> About </a></p>
+    <p><a id ="toAbout" href = "about.html"> About MBTI</a></p>
     <div class="logo" style="text-align:center; padding-top:0">
         <a href = "/">
         <svg id="main_icon" width="160" height="160" viewBox="0 0 500 500" fill="none"
@@ -201,7 +221,8 @@
 
     </div>
 
-    <p class="text-center my-5" id="main_desc">Find your top MBTIs</p>
+    <p class="text-center my-5" id="main_desc">Find your top Myers-Briggs (MBTI)</p>
+    <h4 class="text-center" id="description">MBTI is a tool that gives you insight into what makes you, you. It helps you understand your personality preferences in four key areas: source of energy, ways of learning, decision making, and organization of environment.</h4>
 
     <div class="messages">
         <div id="flex_start" class="message_row">
@@ -249,8 +270,8 @@
 
         <div id="flex_end" class="message_row">
             <form class="form-inline global-search" id="search">
-                <textarea id="input" rows="4" cols="50" name="search" class="form-control"
-                    placeholder="Place your text here" minlength="15"></textarea>
+                <textarea id="input" rows="4" cols="100" name="search" class="form-control"
+                    placeholder="Place message 1 here:&#x0a;&#x09;&#x09;&#x09;Place message 2 here:&#x0a;&#x09;&#x09;&#x09;Place message 3 here:" minlength="15"></textarea>
                 <button type="submit" class="btn btn-primary" id="search_button">Search</button>
             </form>
 
@@ -275,7 +296,6 @@
                 </svg>
             </div>
         </div>
-
     </div>
 </div>
   
@@ -288,19 +308,22 @@
                 <h2>Here are your most likely MBTIs!</h2>
                 <div id="mbti_results">
                     {% for d in data[0] %}
+    
                     <p>
-                        {{loop.index}}.
-                        <span class="bold">MBTI</span>: {{d[1]}} &nbsp; 
-                        <span class="bold">Score</span>: {{d[0]}}  &nbsp; 
-                        <span class="bold">Keywords</span>: 
-                        {% for keyword in d[2] %}
-                            {{keyword}}
-                        {% endfor %}
+                    {{loop.index}}.
+                    <span class="bold">MBTI</span>: {{d[1]}} &nbsp; 
+                    <span class="bold">Score</span>: {{d[0]}}  &nbsp; 
+                    <span class="bold">Keywords</span>: 
+                    {% for keyword in d[2] %}
+                        {{keyword}}
+                    {% endfor %}
+                    <button id={{loop.index}}_up class="btn-light feedback_button"><img class="feedback" src="/static/up.png"></button>
+                    <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button>
                     </p>
                     {% endfor %}
                 </div>
 
-                <h2>Based on your top MBTIs, here are the movies most similar to you!</h2>
+                <h2>Based on your top MBTIs, here are the movies characters most similar to you!</h2>
                 {% for d in data[1] %}
                 <div class="movie_results">
                     <div class="each_movie">
@@ -319,21 +342,17 @@
 
                     </div>
                 </div>
-
                 {% endfor %}
                 {% endif %}
 
                 {% if data|length == 0  %}
-
                 <p id = "no_result"> No results found. Please try again.</p>
-                 
                 {% endif %}
-
             </form>
         </div>
 
     <script>
-        document.getElementById("result").scrollIntoView();
+        document.getElementById("result").scrollIntoView({ behavior: 'smooth'});
         // let search_button = document.getElementById("search_button");
         // console.log(search_button);
         // document.getElementById("#search_button").on("click", () => {
