@@ -177,6 +177,22 @@
             text-align: left;
             color: #1579BD;
         }
+        [type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 2px solid #f00;
+}
     </style>
 
 
@@ -322,16 +338,18 @@
                     {% for keyword in d[2] %}
                     {{keyword}}
                     {% endfor %}
-                    <!-- <button id={{loop.index}}_up class="btn-light feedback_button"><img class="feedback" src="/static/up.png"></button>
+                    <!-- <button id={{loop.index}}_up class="btn-light feedback_button"></button>
                     <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button> -->
 
-                    <label class="container">Relevant
+                    <label class="container">
                         <input type="radio" checked="checked" name="radio_{{loop.index}}" value="relevant_{{d[1]}}">
+                        <img class="feedback" src="/static/up.png">
                         <span class="checkmark"></span>
                     </label>
                     <br>
-                    <label class="container">Irrelevant
+                    <label class="container">
                         <input type="radio" checked="checked" name="radio_{{loop.index}}" value="irrelevant_{{d[1]}}">
+                        <img class="feedback" src="/static/down.png">
                         <span class="checkmark"></span>
                     </label>
 
