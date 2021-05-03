@@ -318,10 +318,10 @@
                     {% for keyword in d[2] %}
                         {{keyword}}
                     {% endfor %}
-                    <!-- <button id={{loop.index}}_up class="btn-light feedback_button"><img class="feedback" src="/static/up.png"></button>
-                    <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button> -->
+                    <button id={{loop.index}}_up class="btn-light feedback_button"><img class="feedback" src="/static/up.png"></button>
+                    <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button>
 
-                    <label class="container">Relevant
+                    <!-- <label class="container">Relevant
                         <input type="radio" checked="checked" name="radio_{{loop.index}}" value="relevant_{{d[1]}}">
                         <span class="checkmark"></span>
                       </label>
@@ -329,7 +329,7 @@
                       <label class="container">Irrelevant
                         <input type="radio" checked="checked" name="radio_{{loop.index}}" value="irrelevant_{{d[1]}}">
                         <span class="checkmark"></span>
-                      </label>
+                      </label> -->
       
                     </p>
                     {% endfor %}
