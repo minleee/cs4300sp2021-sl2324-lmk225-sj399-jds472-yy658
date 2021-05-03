@@ -54,6 +54,8 @@ def search():
 				a = str(a) + '%'
 				rankings[idx] = (a, b,c)
 			top_5 = (rankings[:5], combined[:5], top_words)
+		elif rankings == []:
+			top_5 = ([], [], [])
 	# if user submitted feedback form for Rocchio algorithm
 	elif request.args.get('radio_1'):
 		rel = []
@@ -73,6 +75,7 @@ def search():
 		rankings = m.rocchio_search(updated_query, inv_idx, idf, doc_norms, mbti_keys)
 		movies = m.rank_movies(rankings.copy(), movie_index, updated_movie, mbti_keys)
 		top_5 = []
+
 		if rankings != [] and rankings[0][0] !=0:
 			top_mbti = [(i[0], i[1]) for i in rankings][:5]
 			top_words = [i[2] for i in rankings][:5]
@@ -87,7 +90,8 @@ def search():
 				a = str(a) + '%'
 				rankings[idx] = (a, b,c)
 			top_5 = (rankings[:5], combined[:5], top_words)
-	# nothing was submitted
+		else:
+			top_5 = ([], [], [])
 	else:
 		data = []
 		output_message = ''
