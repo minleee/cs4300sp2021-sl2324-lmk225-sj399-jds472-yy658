@@ -13,34 +13,40 @@ import app.irsystem.controllers.rank_mbti as m
 project_name = "Mo_Bie_TI"
 net_id = "Justin Sun (jds472), Lydia Kim (lmk225), Sohwi Jung (sj399), Seungmin Lee (sl2324), Grace Yim (yy658)"
 
-inv_idx = json.load( open( "data/inv_idx.json" ) )
-idf = json.load( open( "data/idf.json" ) )
-character_dict = json.load( open( "data/character_dict.json" ) )
+# load data files and precompute necessary values
+inv_idx = json.load(open( "data/inv_idx.json"))
+idf = json.load(open( "data/idf.json"))
+character_dict = json.load(open( "data/character_dict.json"))
 doc_norms = np.loadtxt('data/doc_norms.txt')
-movie_index = np.loadtxt('data/movie_index.txt', delimiter='\n', dtype=str, comments=None)
+movie_index = np.loadtxt('data/movie_index.txt', delimiter = '\n', dtype=str, comments = None)
 updated_movie = np.loadtxt('data/updated_movie.txt')
 tf_idf = np.loadtxt('data/tf_idf.txt')
-words_index = json.load( open( "data/words_index.json" ) )
+words_index = json.load(open( "data/words_index.json"))
 mbti_keys = ['INFJ', 'ENTP', 'INTP', 'INTJ', 'ENTJ', 'ENFJ', 'INFP', 'ENFP', 'ISFP', 'ISTP', 'ISFJ', 'ISTJ', 'ESTP', 'ESFP', 'ESTJ', 'ESFJ']
 
 @irsystem.route('/', methods=['GET'])
 def search():
+	# get search query
 	query = request.args.get('search')
 
 	output_message = ''
+	# if user submitted a query
 	if query:
+		# calculate MBTI and movie ranks
 		output_message = "Your search: " + query
 		rankings = m.rank_mbtis(query, inv_idx, idf, doc_norms, mbti_keys)
 		movies = m.rank_movies(rankings.copy(), movie_index, updated_movie, mbti_keys)
 		top_5 = []
+		# if rankings are nonempty
 		if rankings != [] and rankings[0][0] !=0:
 			top_mbti = [(i[0], i[1]) for i in rankings][:5]
-			# top words in query 
+			# find top ranking movies, characters, words
 			top_words = [i[2] for i in rankings][:5]
 			top_5 = movies[:5]
 			combined = m.get_characters(top_mbti, top_5, character_dict)
 			top_5 = (rankings[:5], combined[:5], top_words)
 
+			# reformat MBTI scores to be in percentages
 			s = sum([pair[0] for pair in rankings])
 			for idx, (a,b,c) in enumerate(rankings):
 				a = (a / s) * 100
@@ -48,15 +54,18 @@ def search():
 				a = str(a) + '%'
 				rankings[idx] = (a, b,c)
 			top_5 = (rankings[:5], combined[:5], top_words)
+	# if user submitted feedback form for Rocchio algorithm
 	elif request.args.get('radio_1'):
 		rel = []
 		nrel = []
+		# calculate which MBTIs are relevant and nonrelevant
 		for i in range(1,6):
 			if 'relevant' == request.args.get('radio_' + str(i))[:8]:
 				rel.append(request.args.get('radio_' + str(i))[-4:])
 			else:
 				nrel.append(request.args.get('radio_' + str(i))[-4:])
 
+		# compute new rankings based on updated query vector
 		query = request.args.get('rocchio-selected')
 		query = query[13:]
 		output_message = "Your search: " + query
@@ -66,7 +75,6 @@ def search():
 		top_5 = []
 		if rankings != [] and rankings[0][0] !=0:
 			top_mbti = [(i[0], i[1]) for i in rankings][:5]
-			# top words in query 
 			top_words = [i[2] for i in rankings][:5]
 			top_5 = movies[:5]
 			combined = m.get_characters(top_mbti, top_5, character_dict)
@@ -79,6 +87,7 @@ def search():
 				a = str(a) + '%'
 				rankings[idx] = (a, b,c)
 			top_5 = (rankings[:5], combined[:5], top_words)
+	# nothing was submitted
 	else:
 		data = []
 		output_message = ''
