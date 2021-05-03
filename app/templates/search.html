@@ -300,13 +300,14 @@
 </div>
   
         <div id="results">
-            <form class="form-result global-search" id="result">
+            <form class="form-result global-search" id="result" >
                 {% if data|length != 0  %}
                 <h1>{{output_message}}</h1>
 
                 <br>
                 <h2>Here are your most likely MBTIs!</h2>
                 <div id="mbti_results">
+                <!-- <form class="feedback" id="feedback"> -->
                     {% for d in data[0] %}
     
                     <p>
@@ -317,10 +318,23 @@
                     {% for keyword in d[2] %}
                         {{keyword}}
                     {% endfor %}
-                    <button id={{loop.index}}_up class="btn-light feedback_button"><img class="feedback" src="/static/up.png"></button>
-                    <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button>
+                    <!-- <button id={{loop.index}}_up class="btn-light feedback_button"><img class="feedback" src="/static/up.png"></button>
+                    <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button> -->
+
+                    <label class="container">Relevant
+                        <input type="radio" checked="checked" name="radio_{{loop.index}}" value="relevant_{{d[1]}}">
+                        <span class="checkmark"></span>
+                      </label>
+                      <br>
+                      <label class="container">Irrelevant
+                        <input type="radio" checked="checked" name="radio_{{loop.index}}" value="irrelevant_{{d[1]}}">
+                        <span class="checkmark"></span>
+                      </label>
+      
                     </p>
                     {% endfor %}
+                    <button type="submit" name="rocchio-selected" class="btn btn-info" value = "{{output_message}}"> Submit </button>
+                <!-- </form> -->
                 </div>
 
                 <h2>Based on your top MBTIs, here are the movies characters most similar to you!</h2>

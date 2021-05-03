@@ -105,7 +105,6 @@ def index_search(query, index, idf, doc_norms, mbti_keys):
       tfidf_query.append((term, tfidf_score))
       norm_sum += math.pow(tfidf_score, 2)
   
-  print(tfidf_query)
   # # calculate norm of query
   # q_norm = math.sqrt(norm_sum)
     
@@ -236,7 +235,7 @@ def rocchio_update(query, rel, nrel, idf, tf_idf, words_index, mbti_keys, a = 0.
   third = np.zeros(len(q_vector))
   if len(nrel) != 0:
       for nr in nrel:
-          nrel_vector = tf_idf[mbti_keys.index(r)]
+          nrel_vector = tf_idf[mbti_keys.index(nr)]
           third = np.add(third, nrel_vector)
       third = (c / len(nrel)) * third
 
