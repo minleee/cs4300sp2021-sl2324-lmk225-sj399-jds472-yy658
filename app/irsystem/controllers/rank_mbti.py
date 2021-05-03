@@ -70,11 +70,12 @@ def compute_idf(inv_idx, n_docs, min_df=1, max_df_ratio=1):
 
 def valid_query(input_query, idf_dict):
   # check if query is valid
+  result = []
   tokenize_query = tokenize(input_query.lower())
   for token in tokenize_query:
-      if token not in idf_dict:
-          tokenize_query.remove(token)
-  return tokenize_query
+      if token in idf_dict:
+          result.append(token)
+  return result
 
 def compute_doc_norms(index, idf, n_docs):
   # initialization
@@ -103,9 +104,8 @@ def index_search(query, index, idf, doc_norms, mbti_keys):
       tfidf_score = idf[term] * tf_q[term]
       tfidf_query.append((term, tfidf_score))
       norm_sum += math.pow(tfidf_score, 2)
-      print(term)
-      print(tfidf_score)
   
+  print(tfidf_query)
   # # calculate norm of query
   # q_norm = math.sqrt(norm_sum)
     
@@ -211,13 +211,16 @@ def get_characters(mbti_list, movie_list, character_dict):
     final.append(m)
   return final
 
-def rocchio_update(query, rel, nrel, idf, a = 0.3, b = 0.8, c = 0.3):
+def rocchio_update(query, rel, nrel, idf, tf_idf, words_index, mbti_keys, a = 0.3, b = 0.8, c = 0.3):
   # with idf instead of tf-idf for now
-  q = valid_query(query, idf)
+  q = list(set(valid_query(query, idf)))
+  q_index = [ words_index[word] for word in q]
 
-  q_vector = np.zeros(len(q))
+  tf_q = Counter(q)
+
+  q_vector = np.zeros(len(tf_idf[0]))
   for idx, term in enumerate(q):
-    q_vector[idx]= idf[term]
+    q_vector[words_index[term]]= tf_q[term] * idf[term]
   
   updated_q = np.zeros(len(q_vector))
 
@@ -226,23 +229,71 @@ def rocchio_update(query, rel, nrel, idf, a = 0.3, b = 0.8, c = 0.3):
   second = np.zeros(len(q_vector))
   if len(rel) != 0:
     for r in rel:
-        rel_vector = q_vector
+        rel_vector = tf_idf[mbti_keys.index(r)]
         second = np.add(second, rel_vector)
     second = (b / len(rel)) * second
 
   third = np.zeros(len(q_vector))
   if len(nrel) != 0:
       for nr in nrel:
-          nrel_vector = q_vector
+          nrel_vector = tf_idf[mbti_keys.index(r)]
           third = np.add(third, nrel_vector)
       third = (c / len(nrel)) * third
 
   # updated query
   updated_q = np.clip(first + second - third, a_min = 0, a_max = None)
-
+  
+  result = []
+  #(term,tf_idf)
   for idx, term in enumerate(q):
-    idf[term] = updated_q[idx]
-  json.dump(idf, open('data/idf.json', 'w'))
+    result.append((term, updated_q[q_index[idx]]))
+
+  return result
+
+  # for idx, term in enumerate(q):
+  #   idf[term] = updated_q[idx]
+  # json.dump(idf, open('data/idf.json', 'w'))
 
 
+def rocchio_search(updated_query, index, idf, doc_norms, mbti_keys):
+
+  # initializations
+  tfidf_query = updated_query # list containing tuples of terms and their respective tf-idf score for terms in the query
+
+  # initialization
+  # dictionary of cosine similarity numerator     
+  d = {}
+  words = {}
+    
+  # compute cosine similarity numerator
+  for term, score in tfidf_query:
+      invidx_list = index[term]
+      for mbti, tf in invidx_list:
+          if mbti not in d:
+              scores = score * (tf * idf[term])
+              d[mbti] = scores
+              words[mbti] = [(scores, term)]
+          else:
+              d[mbti] += score * (tf * idf[term])
+              words[mbti] += [(scores, term)]
+    
+  # initialization
+  # list of tuples of cosine similarity score and doc
+  results = []
+    
+  # compute cosine similarity    
+  mbti_index = mbti_keys        
+  for mbti in d:
+      d_norm = doc_norms[mbti]
+      # norm_product = q_norm * d_norm
+      if d_norm != 0:
+          sim = d[mbti] / d_norm
+          w = words[mbti]
+          sorted_words = sorted(w, key = lambda x: (-x[0]))
+          sorted_words = [i[1] for i in sorted_words]
+          results.append((sim, mbti_index[mbti], sorted_words))
+        
+  results = sorted(results, key = lambda x: (-x[0]))
+
+  return [ (round(a,4),b,c) for (a,b,c) in results ]
 

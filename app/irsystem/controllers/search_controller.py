@@ -19,6 +19,8 @@ character_dict = json.load( open( "data/character_dict.json" ) )
 doc_norms = np.loadtxt('data/doc_norms.txt')
 movie_index = np.loadtxt('data/movie_index.txt', delimiter='\n', dtype=str, comments=None)
 updated_movie = np.loadtxt('data/updated_movie.txt')
+tf_idf = np.loadtxt('data/tf_idf.txt')
+words_index = json.load( open( "data/words_index.json" ) )
 mbti_keys = ['INFJ', 'ENTP', 'INTP', 'INTJ', 'ENTJ', 'ENFJ', 'INFP', 'ENFP', 'ISFP', 'ISTP', 'ISFJ', 'ISTJ', 'ESTP', 'ESFP', 'ESTJ', 'ESFJ']
 
 @irsystem.route('/', methods=['GET'])
@@ -26,11 +28,11 @@ def search():
 	query = request.args.get('search')
 
 	output_message = ''
-	print(query)
+	# print(query)
 	if not query:
 		data = []
 		output_message = ''
-		print('no query')
+		# print('no query')
 		return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)
 	else:
 		output_message = "Your search: " + query
@@ -45,15 +47,17 @@ def search():
 			combined = m.get_characters(top_mbti, top_5, character_dict)
 			top_5 = (rankings[:5], combined[:5], top_words)
 
-			# m.rocchio_update(query, ['ESTJ', 'ENFP'], ['ENFJ', 'ENTP', 'INFP'], idf)
-		# 	s = sum([pair[0] for pair in rankings])
-		# 	for idx, (a,b) in enumerate(rankings):
-		# 		a = (a / s) * 100
-		# 		a = round(a, 2)
-		# 		a = str(a) + '%'
-		# 		rankings[idx] = (a, b)
-		# 	top_5 = rankings[:5]
+			print(rankings)
+			s = sum([pair[0] for pair in rankings])
+			for idx, (a,b,c) in enumerate(rankings):
+				a = (a / s) * 100
+				a = round(a, 2)
+				a = str(a) + '%'
+				rankings[idx] = (a, b,c)
+			top_5 = (rankings[:5], combined[:5], top_words)
 
+	print(query)
+	print(m.rocchio_update(query, ['ESTJ', 'ENFP'], ['ENFJ', 'ENTP', 'INFP'], idf, tf_idf, words_index, mbti_keys, a = 0.3, b = 0.8, c = 0.3))
 
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=top_5)
 
