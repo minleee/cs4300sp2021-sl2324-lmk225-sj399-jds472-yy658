@@ -1,6 +1,9 @@
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoBieTI</title>
     <link rel="stylesheet" href="/static/bootstrap.min.css">
     <link rel="stylesheet" href="/static/main.css">
     <style>
@@ -23,6 +26,12 @@
                 font-size: 35px;
                 color: #1579BD;
                 font-weight: bold;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: none;
             }
         }
 
@@ -176,26 +185,43 @@
             margin: 0 auto;
             text-align: left;
             color: #1579BD;
+            font-size: 1.5em;
         }
+
         [type=radio] { 
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-/* IMAGE STYLES */
-[type=radio] + img {
-  cursor: pointer;
-}
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
 
-/* CHECKED STYLES */
-[type=radio]:checked + img {
-  outline: 2px solid #f00;
-}
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 2px solid #f00;
+        }
+
+        #feedback_submit_button {
+            width: 50%;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        #no_result {
+            color: red;
+        }
+
+        footer {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 30px;
+            padding: 20px;
+        }
     </style>
-
-
 
 </head>
 
@@ -280,18 +306,16 @@
                     Tired of taking long tests to get your MBTI? <br>Just enter your last text message to see your most
                     likely MBTI!
                     For best results, enter at least 3 text messages/phrases you use frequently.
-                    <br>
-                    (Format: your first text [press enter] your second text [press enter] ...)
+                    
                 </div>
             </div>
 
             <br>
 
             <div id="flex_end" class="message_row">
-                <form class="form-inline global-search" id="search">
+                <form class="form-inline global-search" id="search" onsubmit = "event.preventDefault(); myValidation();">
                     <textarea id="input" rows="4" cols="100" name="search" class="form-control"
-                        placeholder="Place message 1 here:&#x0a;&#x09;&#x09;&#x09;Place message 2 here:&#x0a;&#x09;&#x09;&#x09;Place message 3 here:"
-                        minlength="15"></textarea>
+                        placeholder="Please enter at least 30 words."></textarea>
                     <button type="submit" class="btn btn-primary" id="search_button">Search</button>
                 </form>
 
@@ -327,9 +351,7 @@
             <br>
             <h2>Here are your most likely MBTIs!</h2>
             <div id="mbti_results">
-                <!-- <form class="feedback" id="feedback"> -->
                 {% for d in data[0] %}
-
                 <p>
                     {{loop.index}}.
                     <span class="bold">MBTI</span>: {{d[1]}} &nbsp;
@@ -338,9 +360,7 @@
                     {% for keyword in d[2] %}
                     {{keyword}}
                     {% endfor %}
-                    <!-- <button id={{loop.index}}_up class="btn-light feedback_button"></button>
-                    <button id={{loop.index}}_down class="btn-light feedback_button"><img class="feedback" src="/static/down.png"></button> -->
-
+                    
                     <label class="container">
                         <input type="radio" checked="checked" name="radio_{{loop.index}}" value="relevant_{{d[1]}}">
                         <img class="feedback" src="/static/up.png">
@@ -355,9 +375,8 @@
 
                 </p>
                 {% endfor %}
-                <button type="submit" name="rocchio-selected" class="btn btn-info" value="{{output_message}}"> Submit
+                <button type="submit" name="rocchio-selected" id="feedback_submit_button" class="btn btn-info" value="{{output_message}}"> Submit
                 </button>
-                <!-- </form> -->
             </div>
 
             <h2>Based on your top MBTIs, here are the movies characters most similar to you!</h2>
@@ -390,50 +409,52 @@
         </form>
     </div>
 
+    <footer>
+        By Grace, Justin, Lydia, Min, and Sohwi 🧠🎥
+    </footer>
+
+
     <script>
         document.getElementById("result").scrollIntoView({ behavior: 'smooth' });
-        // let search_button = document.getElementById("search_button");
-        // console.log(search_button);
-        // document.getElementById("#search_button").on("click", () => {
-        //     console.log("click")
-        // window.scrollTo(0, 400);
-        // })
+        let wrapper = document.createElement('div');
+        let text    = document.getElementById("input");
+        let c_wrap  = document.createElement('div');
+        let count   = document.createElement('span');
+        wrapper.style.position = 'relative';
+        c_wrap.style.position = 'absolute';
+        c_wrap.style.bottom = '0px';
+        c_wrap.style.right = '10px';
+        c_wrap.style.color = '#ccc';
+        count.innerHTML = '0/30';
+        text.parentNode.prepend(wrapper);
+        wrapper.appendChild(text);
+        c_wrap.appendChild(count);
+        wrapper.appendChild(c_wrap);
 
-        // no_result = document.getElementById("no_result");
+        function checktextarea() {
+            let words = this.value.split(' ');
+            count.innerHTML = words.length + "/" + "30";
+        }
+        let textarea = document.getElementById('input');
+        textarea.addEventListener('keydown', checktextarea);
+        textarea.addEventListener('keyup', checktextarea);
 
-        // no_result.style.display = "none";
-        // search = document.getElementById("search_button");
-        // search.addEventListener("click", function(){
-        //     no_result.style.display = "block";  
-        // });
+        let form = document.getElementById("search");
+        form.addEventListener('submit', myValidation);
+        function myValidation(e) {
+            e.preventDefault();
+            let valid = true;
+            let textarea = document.getElementById('input');
+            let count = textarea.value.split(' ').length;
+            if(count <= 30) {
+                alert("Please enter at least 30 words!");
+                valid = (false)    
+            }
+            if (valid) this.submit();
+        };
 
-        let form_valid;
-
-        // let form = document.getElementById("search");
-
-        // form.addEventListener("submit", () => {
-        //     console.log("submitted")
-        //     let get_input = document.getElementById("input").val();
-        //     get_input = get_input.trim()
-        //     console.log(get_input)
-        //     if (input.split(" ").length < 5) {
-        //         form_valid = False;
-        //     } else {
-        //         form_valid = True;
-        //     }
-        // });
-        // if (form_valid) {
-        //     // console.log("valid")
-        // } else {
-        //     // console.log("invalid")
-        // }
     </script>
 
-
-    <div id="newtopcorner">
-        <p>Project Name: {{ name }}</p>
-        <p>Student Name: ({{ netid }})</p>
-    </div>
 </body>
 
 </html>
